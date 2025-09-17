@@ -29,8 +29,7 @@ namespace NzbDrone.Core.MetadataSource.Goodreads
             _cachedHttpClient = cachedHttpClient;
             _logger = logger;
 
-            _requestBuilder = new HttpRequestBuilder("https://www.goodreads.com/{route}")
-                .AddQueryParam("key", new string("gSuM2Onzl6sjMU25HY1Xcd".Reverse().ToArray()))
+            _requestBuilder = new HttpRequestBuilder("https://api.bookinfo.pro/{route}")
                 .AddQueryParam("_nc", "1")
                 .SetHeader("User-Agent", "Dalvik/1.6.0 (Linux; U; Android 4.1.2; GT-I9100 Build/JZO54K)")
                 .KeepAlive()
@@ -72,8 +71,7 @@ namespace NzbDrone.Core.MetadataSource.Goodreads
         {
             _logger.Debug("Getting List with GoodreadsId of {0}", foreignListId);
 
-            var httpRequest = new HttpRequestBuilder("https://www.goodreads.com/book/list/listopia.xml")
-                .AddQueryParam("key", new string("whFzJP3Ud0gZsAdyXxSr7T".Reverse().ToArray()))
+            var httpRequest = new HttpRequestBuilder("https://api.bookinfo.pro/book/list/listopia.xml")
                 .AddQueryParam("_nc", "1")
                 .AddQueryParam("format", "xml")
                 .AddQueryParam("id", foreignListId)
