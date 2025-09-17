@@ -554,6 +554,16 @@ namespace NzbDrone.Core.Parser
             if (parenthesis > -1)
             {
                 var endParenthesis = book.IndexOf(')', parenthesis);
+                if (endParenthesis > -1)
+                {
+                    var content = book.Substring(parenthesis + 1, endParenthesis - parenthesis - 1);
+                    if (Regex.IsMatch(content, @"\b(book|part)\b\s*\d+", RegexOptions.IgnoreCase) ||
+                        Regex.IsMatch(content, @"^\d{4}$"))
+                    {
+                        parenthesis = -1;
+                    }
+                }
+
                 if (endParenthesis == -1 || !book.Substring(parenthesis + 1, endParenthesis - parenthesis).Contains(' '))
                 {
                     parenthesis = -1;
